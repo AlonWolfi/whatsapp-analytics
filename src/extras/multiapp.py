@@ -42,6 +42,13 @@ class MultiApp:
         buttons = []
         selected_app = self.apps[0]
         for app in self.apps:
+            m = st.markdown("""
+                <style>
+                div.stButton > button:first-child {
+                    /* background-color: rgb(204, 49, 49);*/
+                    width: 100%;
+                }
+                </style>""", unsafe_allow_html=True)
             if st.sidebar.button(app["title"]):
                 selected_app = app
                 print(app["title"])
