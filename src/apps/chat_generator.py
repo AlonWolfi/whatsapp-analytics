@@ -4,7 +4,6 @@ import pandas as pd
 from utils import is_chat_exist, read_chat
 
 def get_real_conversation(chat):
-    chat_at_date = pd.DataFrame()
     dates = chat['datetime'].dt.date
     massages_per_date = chat.groupby(dates)['text'].count()
     valid_dates = massages_per_date[massages_per_date > 10].index

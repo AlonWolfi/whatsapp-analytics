@@ -1,8 +1,4 @@
-import streamlit as st
-
-from apps import *
 from apps import home, statistics, chat_generator
-from extras.footer import footer
 from extras.header import header
 from extras.multiapp import MultiApp
 from extras.style import style_css

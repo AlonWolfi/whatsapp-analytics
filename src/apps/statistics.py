@@ -15,8 +15,7 @@ TOKENS = [MEDIA_TOKEN, URL_TOKEN]
 
 
 def preprocess_text_for_wordcloud(text):
-    if text == '<המדיה לא נכללה>':
-        return MEDIA_TOKEN
+    text = re.sub('<המדיה לא נכללה>', MEDIA_TOKEN, text)
     text = re.sub('https?://\S+|www\.\S+', URL_TOKEN, text)
     return text
 def reverse_text(text):
