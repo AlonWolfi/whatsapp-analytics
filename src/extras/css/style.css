@@ -1,0 +1,56 @@
+/* 
+For main - section.main > div.block-container
+For sidebar - section > div > div.block-container
+*/
+
+
+section.main > div.block-container > div > div > div.stMarkdown > div > p {
+  text-align: right;
+}
+ 
+section.main > div.block-container > div > div > div.stMarkdown > div > h1 > div > span {
+  text-align: right;
+}
+
+section.main > div.block-container > div > div > div > div > div > div > div.stMarkdown > div > p {
+  text-align: right;
+}
+ 
+section.main > div.block-container > div > div > div > div > div > div > div.stMarkdown > div > h1 > div > span {
+  text-align: right;
+}
+
+
+/*
+h1 {
+  text-align: right;
+}
+h2 {
+  text-align: right;
+}
+label {
+  text-align: right;
+} */
+
+
+section.main > div.block-container > div > div > div.stButton > button:first-child {
+  /* background-color: rgb(204, 49, 49);*/
+  width: 30%;
+  /* display: inline-block; */
+  float: left;
+  position: relative;
+  left: 35%;
+  /* float: center; */
+}
+/* Sidebar Button */
+section > div > div.block-container > div > div > div.stButton > button:first-child {
+  /* background-color: rgb(204, 49, 49);*/
+  width: 100%;
+}
+
+
+
+
+/* * {
+  font-family: Lucida Console,Lucida,Monospace;
+} */

@@ -75,6 +75,3 @@ def footer():
     ]
     layout(*myargs)
 
-
-if __name__ == "__main__":
-    footer()

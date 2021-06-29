@@ -1,24 +1,40 @@
 import streamlit as st
+
+from apps import *
+from apps import home, statistics, chat_generator
+from extras.footer import footer
+from extras.header import header
 from extras.multiapp import MultiApp
 from extras.style import style_css
-from extras.footer import footer
-from apps import home, data, model # import your app modules here
-
-app = MultiApp()
-
-st.markdown("""
-# Multi-Page App
-
-This multi-page app is using the [streamlit-multiapps](https://github.com/upraneelnihar/streamlit-multiapps) framework developed by [Praneel Nihar](https://medium.com/@u.praneel.nihar). Also check out his [Medium article](https://medium.com/@u.praneel.nihar/building-multi-page-web-app-using-streamlit-7a40d55fa5b4).
-
-""")
 
 
-style_css()
-# Add all your application here
-app.add_app("Home", home.app)
-app.add_app("Data", data.app)
-app.add_app("Model", model.app)
-# The main app
-app.run()
-footer()
+def init():
+    from utils import make_tmp_dir
+    make_tmp_dir()
+
+
+def main(apps: list = []):
+    init()
+
+    style_css()
+    header()
+    # footer()
+    main_app = MultiApp(apps=apps)
+    main_app.run()
+
+
+if __name__ == "__main__":
+    main(apps=[
+        {
+            'title': 'בית',
+            'app': home.app,
+        },
+        {
+            'title': 'סטטיסטיקות',
+            'app': statistics.app,
+        },
+        {
+            'title': 'ייצר שיחה',
+            'app': chat_generator.app,
+        }
+    ])

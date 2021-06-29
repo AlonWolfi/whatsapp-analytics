@@ -1,61 +1,22 @@
-"""Frameworks for running multiple Streamlit applications as a single app.
-"""
 import streamlit as st
 
+
 class MultiApp:
-    """Framework for combining multiple streamlit applications.
-    Usage:
-        def foo():
-            st.title("Hello Foo")
-        def bar():
-            st.title("Hello Bar")
-        app = MultiApp()
-        app.add_app("Foo", foo)
-        app.add_app("Bar", bar)
-        app.run()
-    It is also possible keep each application in a separate file.
-        import foo
-        import bar
-        app = MultiApp()
-        app.add_app("Foo", foo.app)
-        app.add_app("Bar", bar.app)
-        app.run()
-    """
-    def __init__(self):
-        self.apps = []
+    def __init__(self, apps:list = []):
+        self.apps = apps
+        self.counter = 10
 
-    def add_app(self, title, func):
-        """Adds a new application.
-        Parameters
-        ----------
-        func:
-            the python function to render this app.
-        title:
-            title of the app. Appears in the dropdown in the sidebar.
-        """
-        self.apps.append({
-            "title": title,
-            "function": func
-        })
+    def add_app(self, app_dict):
+        self.apps.append(app_dict)
 
-    def run(self):
-        buttons = []
+    def sidebar(self):
         selected_app = self.apps[0]
         for app in self.apps:
-            m = st.markdown("""
-                <style>
-                div.stButton > button:first-child {
-                    /* background-color: rgb(204, 49, 49);*/
-                    width: 100%;
-                }
-                </style>""", unsafe_allow_html=True)
-            if st.sidebar.button(app["title"]):
+            if st.sidebar.button(app['title']):
                 selected_app = app
-                print(app["title"])
-        # app = st.sidebar.radio(
-        # app = st.selectbox(
-            # 'Navigation',
-            # self.apps,
-            # format_func=lambda app: app['title'])
+        return selected_app
+
+    def run(self):
+        selected_app = self.sidebar()
+        selected_app['app']()
         
-        selected_app['function']()
