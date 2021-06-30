@@ -1,17 +1,22 @@
-import streamlit as st
-from pathlib import Path
-import numpy as np
 import time
+
+import numpy as np
+import streamlit as st
 
 from __tmp import tmp
 from config import TMP_DIR, SRC_DIR
 
 
 @st.cache
-def make_tmp_dir():
+def init_tmp_dir():
+    # mkdir
     import os
     if not os.path.exists(TMP_DIR):
         os.makedirs(TMP_DIR)
+    # delete files
+    for f in os.listdir(TMP_DIR):
+        os.remove(os.path.join(TMP_DIR, f))
+
 
 def refresh_page():
     tmp_py_path = SRC_DIR / '__tmp.py'
@@ -24,12 +29,14 @@ def refresh_page():
     time.sleep(0.1)
     tmp()
 
+
 def is_picklable(obj):
     try:
         pickle.dumps(obj)
     except pickle.PicklingError:
         return False
     return True
+
 
 import json
 import os
@@ -41,12 +48,14 @@ from typing import Union
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import Figure
 
+
 def validate_path(file_path: Union[str, Path]):
     for folder in list(Path(file_path).parents)[::-1]:
         try:
             os.stat(folder)
         except:
             os.mkdir(folder)
+
 
 def save_data(data, file_path: Union[str, Path], encoding: str = "utf-8"):
     '''
@@ -69,6 +78,7 @@ def save_data(data, file_path: Union[str, Path], encoding: str = "utf-8"):
     else:
         with open(file_path, 'w+', encoding=encoding) as file:
             file.write(data)
+
 
 @st.cache
 def read_data(file_path: Union[str, Path, list, dict, set], encoding: str = "utf-8"):
@@ -103,25 +113,40 @@ def read_data(file_path: Union[str, Path, list, dict, set], encoding: str = "utf
             data = file.read()
     return data
 
+
 from config import CHAT_PATH
+
 
 def save_chat(chat_dict):
     save_data(chat_dict, CHAT_PATH)
 
-def read_chat(return_name = False):
+
+def read_chat(return_name=False):
     chat_dict = read_data(CHAT_PATH)
     if return_name:
         return chat_dict['df'], chat_dict['name']
     else:
         return chat_dict['df']
 
+
 def delete_chat():
     os.remove(CHAT_PATH)
 
+
 def is_chat_exist():
     return os.path.exists(CHAT_PATH)
+
 
 def load_app(app_name):
     from importlib import import_module
     mod = import_module(f'apps.{app_name}')
     return getattr(mod, 'app')
+
+
+def save_experiment(experiment_name, **params):
+    import mlflow
+    from datetime import datetime
+    with mlflow.start_run(run_name=experiment_name + '_' + str(datetime.now())):
+        for k, v in params.items():
+            mlflow.log_param(k, v)
+

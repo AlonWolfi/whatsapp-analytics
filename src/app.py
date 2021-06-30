@@ -1,16 +1,13 @@
-import streamlit as st
-
-from apps import *
-from apps import home, statistics, chat_generator
-from extras.footer import footer
+from apps import home, statistics, chat_generator, message_generator
 from extras.header import header
 from extras.multiapp import MultiApp
 from extras.style import style_css
 
 
 def init():
-    from utils import make_tmp_dir
-    make_tmp_dir()
+    from utils import init_tmp_dir
+    init_tmp_dir()
+
 
 
 def main(apps: list = []):
@@ -36,5 +33,9 @@ if __name__ == "__main__":
         {
             'title': 'ייצר שיחה',
             'app': chat_generator.app,
-        }
+        },
+        {
+            'title': 'השלם הודעה',
+            'app': message_generator.app,
+        },
     ])
