@@ -2,12 +2,12 @@ import time
 
 import numpy as np
 import streamlit as st
-
+import scipy
 from __tmp import tmp
 from config import TMP_DIR, SRC_DIR
 
 
-@st.cache
+@st.cache   
 def init_tmp_dir():
     # mkdir
     import os
