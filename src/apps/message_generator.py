@@ -5,7 +5,7 @@ from utils import read_chat
 import os
 import time
 from config import DATA_DIR
-from utils import read_data, save_data
+from utils import read_data, save_data, is_chat_exist
 
 def get_sentence_start(file_path = DATA_DIR / 'tmp' / 'sentence_start.txt'):
     sentence_start = 'בוקר טוב'
@@ -21,6 +21,14 @@ def get_sentence_start(file_path = DATA_DIR / 'tmp' / 'sentence_start.txt'):
 
 
 def app():
+    st.title('השלם הודעה')
+
+
+    if not is_chat_exist():
+        st.write('!העלה קובץ בדף הראשי')
+        return
+
+    st.write('קבלו השלמות ע"ב המילים שלכם !')
 
     sentence_start = get_sentence_start()
 

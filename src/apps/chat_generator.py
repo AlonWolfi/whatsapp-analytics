@@ -49,7 +49,8 @@ def display_random_conversation():
 
 
 def app():
-    # global CHAT
+    st.title('ייצר שיחה')
+
     if not is_chat_exist():
         st.write('!העלה קובץ בדף הראשי')
         return

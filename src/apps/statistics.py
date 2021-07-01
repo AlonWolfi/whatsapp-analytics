@@ -258,11 +258,12 @@ def _display_sinunim(chat, name):
 def app():
     st.title('סטטיסטיקות')
 
-    st.write('קבלו סטטיסטיקות על השיחות')
 
     if not is_chat_exist():
         st.write('!העלה קובץ בדף הראשי')
         return
+
+    st.write('קבלו סטטיסטיקות על השיחות')
 
     chat = read_chat()
     names = chat['name'].unique()
