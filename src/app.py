@@ -1,4 +1,6 @@
-from apps import home, statistics, chat_generator, message_generator
+"""Main app
+"""
+from apps import chat_generator, home, message_generator, statistics
 from extras.header import header
 from extras.multiapp import MultiApp
 from extras.style import style_css
@@ -7,7 +9,6 @@ from extras.style import style_css
 def init():
     from utils import init_tmp_dir
     init_tmp_dir()
-
 
 
 def main(apps: list = []):

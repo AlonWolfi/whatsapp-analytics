@@ -10,8 +10,8 @@ def header():
     from config import DATA_DIR
     from PIL import Image
 
-    imagee = Image.open(DATA_DIR / 'images' / 'whatsapp_cover.png').convert('RGB')
-    st.image(imagee, use_column_width=True)
+    im = Image.open(DATA_DIR / 'images' / 'whatsapp_cover.png').convert('RGB')
+    st.image(im, use_column_width=True)
     # st.write("""
     # סמל וואטסאפ
     # """)
